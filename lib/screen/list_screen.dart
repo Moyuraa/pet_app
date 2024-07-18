@@ -11,40 +11,40 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
-  final List<PetData> pets = [
-    ...dogsName.map((name) => PetData(
-          imagePath: 'assets/images/${dogs[dogsName.indexOf(name)]}',
-          name: name,
-          date: '17 jun 2024',
-          description: 'Friendly and playful dog.',
-          isAdopted: false,
-          location: 'New York',
-        )),
-    ...catsName.map((name) => PetData(
-          imagePath: 'assets/images/${cats[catsName.indexOf(name)]}',
-          name: name,
-          date: '17 jun 2024',
-          description: 'Cute and cuddly cat.',
-          isAdopted: true,
-          location: 'Los Angeles',
-        )),
-    ...bunniesName.map((name) => PetData(
-          imagePath: 'assets/images/${bunnies[bunniesName.indexOf(name)]}',
-          name: name,
-          date: '17 jun 2024',
-          description: 'Lovable bunny looking for a home.',
-          isAdopted: false,
-          location: 'Chicago',
-        )),
-    ...birdsName.map((name) => PetData(
-          imagePath: 'assets/images/${birds[birdsName.indexOf(name)]}',
-          name: name,
-          date: '17 jun 2024',
-          description: 'Colorful bird seeking a caring owner.',
-          isAdopted: false,
-          location: 'Miami',
-        )),
-  ];
+ final List<PetData> pets = [
+  ...dogsName.map((name) => PetData(
+        imagePath: 'assets/images/${dogs[dogsName.indexOf(name)]}',
+        name: name,
+        date: '17 jun 2024',
+        description: 'Friendly and playful dog.',
+        isAdopted: false,
+        location: 'New York',
+      )),
+  ...catsName.map((name) => PetData(
+        imagePath: 'assets/images/${cats[catsName.indexOf(name)]}',
+        name: name,
+        date: '17 jun 2024',
+        description: 'Cute and cuddly cat.',
+        isAdopted: true,
+        location: 'Los Angeles',
+      )),
+  ...bunniesName.map((name) => PetData(
+        imagePath: 'assets/images/${bunnies[bunniesName.indexOf(name)]}',
+        name: name,
+        date: '17 jun 2024',
+        description: 'Lovable bunny looking for a home.',
+        isAdopted: false,
+        location: 'Chicago',
+      )),
+  ...birdsName.map((name) => PetData(
+        imagePath: 'assets/images/${birds[birdsName.indexOf(name)]}',
+        name: name,
+        date: '17 jun 2024',
+        description: 'Colorful bird seeking a caring owner.',
+        isAdopted: false,
+        location: 'Miami',
+      )),
+];
 
   String searchQuery = '';
 
@@ -96,8 +96,8 @@ class _ListScreenState extends State<ListScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (context) => PetDetailPage(
-                              // Add necessary parameters here
-                              ),
+                           
+                          ),
                         ),
                       );
                     },

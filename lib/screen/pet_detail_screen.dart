@@ -1,10 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:final_project/style/size_config.dart';
 import 'package:final_project/style/app_styles.dart';
 
-class PetDetailPage extends StatelessWidget {
+class PetDetailPage extends StatefulWidget {
   const PetDetailPage({Key? key}) : super(key: key);
+
+  @override
+  _PetDetailPageState createState() => _PetDetailPageState();
+}
+
+class _PetDetailPageState extends State<PetDetailPage> {
+  bool isFavorite = false;
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -104,11 +117,11 @@ class PetDetailPage extends StatelessWidget {
                     ],
                   ),
                   GestureDetector(
-                    onTap: () {
-                      debugPrint('Favorite Button Tapped');
-                    },
+                    onTap: toggleFavorite,
                     child: SvgPicture.asset(
-                      'assets/favorite_icon.svg',
+                      isFavorite
+                          ? 'assets/favorite_filled_icon.svg'
+                          : 'assets/favorite_icon.svg',
                       width: 30,
                     ),
                   ),
@@ -250,9 +263,8 @@ class PetDetailPage extends StatelessWidget {
               height: kPaddingHorizontal,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kPaddingHorizontal,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
                 'Photo Album',
                 style: kSourceSansProLight.copyWith(
@@ -265,9 +277,8 @@ class PetDetailPage extends StatelessWidget {
               height: 12,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kPaddingHorizontal,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -288,9 +299,7 @@ class PetDetailPage extends StatelessWidget {
                     height: 55,
                     width: SizeConfig.blockSizeHorizontal! * 25,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
+                      borderRadius: BorderRadius.circular(6),
                       image: const DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
