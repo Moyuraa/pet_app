@@ -4,7 +4,30 @@ import 'package:final_project/style/size_config.dart';
 import 'package:final_project/style/app_styles.dart';
 
 class PetDetailPage extends StatelessWidget {
-  const PetDetailPage({Key? key}) : super(key: key);
+  final String imageCoverURL;
+  final String petName;
+  final String location;
+  final String age;
+  final String color;
+  final String weight;
+  final String introduction;
+  final String imageDis1URL;
+  final String imageDis2URL;
+  final String imageDis3URL;
+
+  const PetDetailPage({
+    super.key,
+    required this.imageCoverURL,
+    required this.petName,
+    required this.location,
+    required this.age,
+    required this.color,
+    required this.weight,
+    required this.introduction,
+    required this.imageDis1URL,
+    required this.imageDis2URL,
+    required this.imageDis3URL,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +35,10 @@ class PetDetailPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: kWhite,
+      appBar: AppBar(
+        shadowColor: Colors.purple,
+        automaticallyImplyLeading: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -21,7 +48,7 @@ class PetDetailPage extends StatelessWidget {
               child: Stack(
                 children: [
                   Image.asset(
-                    'assets/images/dogs/dog_1_cover.png',
+                    imageCoverURL,
                     height: SizeConfig.blockSizeVertical! * 60,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -52,7 +79,7 @@ class PetDetailPage extends StatelessWidget {
                           Navigator.of(context).pop();
                         },
                         child: SvgPicture.asset(
-                          'assets/images/icons/arrow_left_icon.svg',
+                          'assets/arrow_left_icon.svg',
                           width: 40,
                         ),
                       ),
@@ -75,7 +102,7 @@ class PetDetailPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Marly',
+                        petName,
                         style: kSourceSansProBold.copyWith(
                           fontSize: SizeConfig.blockSizeHorizontal! * 6,
                           color: kGrey,
@@ -87,13 +114,13 @@ class PetDetailPage extends StatelessWidget {
                       Row(
                         children: [
                           SvgPicture.asset(
-                            'assets/icons/pin_point_icon.svg',
+                            'assets/pin_point_icon.svg',
                           ),
                           const SizedBox(
                             width: 8,
                           ),
                           Text(
-                            'Arizona, U.S.',
+                            location,
                             style: kSourceSansProLight.copyWith(
                               fontSize: SizeConfig.blockSizeHorizontal! * 4,
                               color: kLightGrey,
@@ -128,7 +155,7 @@ class PetDetailPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          '6 Months',
+                          age,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: kSourceSansProBold.copyWith(
@@ -158,7 +185,7 @@ class PetDetailPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          'Brown',
+                          color,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: kSourceSansProBold.copyWith(
@@ -188,7 +215,7 @@ class PetDetailPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          '6KG',
+                          weight,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: kSourceSansProBold.copyWith(
@@ -230,7 +257,7 @@ class PetDetailPage extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
-                'Remember this sweet face? Several years ago Charlie came into our care when their person died. These two easy-going Lhasa Apso mixes quickly to settle into foster care. Living with kids, cats, and other dogs, they were the perfect guests, and once their vetting and evaluation was done this bonded pair found their home with a kind couple.',
+                introduction,
                 style: kSourceSansProSemibold.copyWith(
                   color: kGrey,
                   fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
@@ -241,9 +268,8 @@ class PetDetailPage extends StatelessWidget {
               height: kPaddingHorizontal,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kPaddingHorizontal,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
                 'Photo Album',
                 style: kSourceSansProLight.copyWith(
@@ -256,9 +282,8 @@ class PetDetailPage extends StatelessWidget {
               height: 12,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kPaddingHorizontal,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -267,25 +292,10 @@ class PetDetailPage extends StatelessWidget {
                     width: SizeConfig.blockSizeHorizontal! * 25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          'assets/images/dogs/dog_1_1.png',
-                        ),
-                      ),
-                    ),
-                  ),
-                  Container(
-                    height: 55,
-                    width: SizeConfig.blockSizeHorizontal! * 25,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        6,
-                      ),
-                      image: const DecorationImage(
-                        fit: BoxFit.cover,
-                        image: AssetImage(
-                          'assets/images/dogs/dog_1_2.png',
+                          imageDis1URL,
                         ),
                       ),
                     ),
@@ -295,10 +305,23 @@ class PetDetailPage extends StatelessWidget {
                     width: SizeConfig.blockSizeHorizontal! * 25,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(6),
-                      image: const DecorationImage(
+                      image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          'assets/images/dogs/dog_1_3.png',
+                          imageDis2URL,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 55,
+                    width: SizeConfig.blockSizeHorizontal! * 25,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6),
+                      image: DecorationImage(
+                        fit: BoxFit.cover,
+                        image: AssetImage(
+                          imageDis3URL,
                         ),
                       ),
                     ),

@@ -34,6 +34,7 @@ flutter:
     - assets/images/icons/
     - assets/images/rabbits/
     - assets/json/developers.json
+    - assets/json/pets.json
 
   fonts:
     - family: Siemreap

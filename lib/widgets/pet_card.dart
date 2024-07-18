@@ -1,20 +1,19 @@
-
 import 'package:flutter/material.dart';
 import 'package:final_project/style/app_styles.dart';
 import 'package:final_project/style/size_config.dart';
 
 class PetCard extends StatelessWidget {
-  final String imagePath;
+  final String imageURL;
   final String petName;
   final String date;
   final bool isAdopted;
 
   const PetCard({
     Key? key,
-    required this.imagePath,
+    required this.imageURL,
     required this.petName,
     required this.date,
-    this.isAdopted = false, 
+    this.isAdopted = false,
   }) : super(key: key);
 
   @override
@@ -43,7 +42,7 @@ class PetCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(kBorderRadiusList),
               child: Image.asset(
-                imagePath, 
+                imageURL,
                 fit: BoxFit.cover,
               ),
             ),
@@ -73,7 +72,7 @@ class PetCard extends StatelessWidget {
               ),
               Icon(
                 isAdopted ? Icons.favorite : Icons.favorite_outline,
-                color: isAdopted ? kRed : Colors.grey, 
+                color: isAdopted ? kRed : Colors.grey,
                 size: 16,
               ),
             ],
