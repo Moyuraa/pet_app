@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+
+class FontSizeLogic extends ChangeNotifier {
+  double _size = 0;
+  double get size => _size;
+
+  void increase() {
+    if (_size < 20) {
+      _size += 2;
+      notifyListeners();
+    }
+  }
+
+  void decrease() {
+    if (_size > 0) {
+      _size -= 2;
+      notifyListeners();
+    }
+  }
+}
