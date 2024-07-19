@@ -6,7 +6,7 @@ import 'package:final_project/style/size_config.dart';
 import 'package:final_project/style/app_styles.dart';
 import 'package:provider/provider.dart';
 
-class PetDetailPage extends StatefulWidget {
+class PetDetailPage extends StatelessWidget {
   final String imageCoverURL;
   final String petName;
   final String location;
@@ -33,24 +33,10 @@ class PetDetailPage extends StatefulWidget {
   });
 
   @override
-  State<PetDetailPage> createState() => _PetDetailPageState();
-}
-
-class _PetDetailPageState extends State<PetDetailPage> {
-  Language _lang = Language();
-
-  bool isFavorite = false;
-
-  void toggleFavorite() {
-    setState(() {
-      isFavorite = !isFavorite;
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
+    Language _lang = Language();
     _lang = context.watch<LanguageLogic>().lang;
 
     return Scaffold(
@@ -68,7 +54,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
               child: Stack(
                 children: [
                   Image.asset(
-                    widget.imageCoverURL,
+                    imageCoverURL,
                     height: SizeConfig.blockSizeVertical! * 60,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -100,28 +86,11 @@ class _PetDetailPageState extends State<PetDetailPage> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              widget.petName,
-                              style: Theme.of(context).textTheme.headlineLarge,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          IconButton(
-                            icon: Icon(
-                              isFavorite
-                                  ? Icons.favorite
-                                  : Icons.favorite_border,
-                              color: isFavorite ? Colors.red : Colors.grey,
-                            ),
-                            onPressed: toggleFavorite,
-                          ),
-                        ],
+                      Text(
+                        petName,
+                        style: Theme.of(context).textTheme.headlineLarge,
+                        overflow: TextOverflow.ellipsis,
                       ),
                       const SizedBox(
                         height: 2,
@@ -135,7 +104,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                             width: 8,
                           ),
                           Text(
-                            widget.location,
+                            location,
                             style: Theme.of(context).textTheme.bodySmall,
                           ),
                         ],
@@ -167,7 +136,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                     child: Column(
                       children: [
                         Text(
-                          widget.age,
+                          age,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.headlineSmall,
@@ -191,7 +160,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                     child: Column(
                       children: [
                         Text(
-                          widget.color,
+                          color,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.headlineSmall,
@@ -216,7 +185,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                     child: Column(
                       children: [
                         Text(
-                          widget.weight,
+                          weight,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.headlineSmall,
@@ -249,7 +218,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
-                widget.introduction,
+                introduction,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
@@ -281,7 +250,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          widget.imageDis1URL,
+                          imageDis1URL,
                         ),
                       ),
                     ),
@@ -294,7 +263,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          widget.imageDis2URL,
+                          imageDis2URL,
                         ),
                       ),
                     ),
@@ -307,7 +276,7 @@ class _PetDetailPageState extends State<PetDetailPage> {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          widget.imageDis3URL,
+                          imageDis3URL,
                         ),
                       ),
                     ),
