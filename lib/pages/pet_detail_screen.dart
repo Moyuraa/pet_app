@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:final_project/style/size_config.dart';
 import 'package:final_project/style/app_styles.dart';
 
-class PetDetailPage extends StatelessWidget {
+class PetDetailPage extends StatefulWidget {
   final String imageCoverURL;
   final String petName;
   final String location;
@@ -16,7 +16,7 @@ class PetDetailPage extends StatelessWidget {
   final String imageDis3URL;
 
   const PetDetailPage({
-    super.key,
+    Key? key,
     required this.imageCoverURL,
     required this.petName,
     required this.location,
@@ -27,7 +27,20 @@ class PetDetailPage extends StatelessWidget {
     required this.imageDis1URL,
     required this.imageDis2URL,
     required this.imageDis3URL,
-  });
+  }) : super(key: key);
+
+  @override
+  _PetDetailPageState createState() => _PetDetailPageState();
+}
+
+class _PetDetailPageState extends State<PetDetailPage> {
+  bool isFavorite = false;
+
+  void toggleFavorite() {
+    setState(() {
+      isFavorite = !isFavorite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +61,7 @@ class PetDetailPage extends StatelessWidget {
               child: Stack(
                 children: [
                   Image.asset(
-                    imageCoverURL,
+                    widget.imageCoverURL,
                     height: SizeConfig.blockSizeVertical! * 60,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -97,56 +110,65 @@ class PetDetailPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        petName,
-                        style: kSourceSansProBold.copyWith(
-                          fontSize: SizeConfig.blockSizeHorizontal! * 6,
-                          color: kGrey,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Row(
-                        children: [
-                          SvgPicture.asset(
-                            'assets/pin_point_icon.svg',
-                          ),
-                          const SizedBox(
-                            width: 8,
-                          ),
-                          Text(
-                            location,
-                            style: kSourceSansProLight.copyWith(
-                              fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                              color: kLightGrey,
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                widget.petName,
+                                style: kSourceSansProBold.copyWith(
+                                  fontSize: SizeConfig.blockSizeHorizontal! * 6,
+                                  color: kGrey,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                            IconButton(
+                              icon: Icon(
+                                isFavorite
+                                    ? Icons.favorite
+                                    : Icons.favorite_border,
+                                color: isFavorite ? Colors.red : Colors.grey,
+                              ),
+                              onPressed: toggleFavorite,
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 2),
+                        Row(
+                          children: [
+                            SvgPicture.asset(
+                              'assets/pin_point_icon.svg',
+                            ),
+                            const SizedBox(width: 8),
+                            Text(
+                              widget.location,
+                              style: kSourceSansProLight.copyWith(
+                                fontSize: SizeConfig.blockSizeHorizontal! * 4,
+                                color: kLightGrey,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
-            const SizedBox(
-              height: kPaddingHorizontal,
-            ),
+            const SizedBox(height: kPaddingHorizontal),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: kPaddingHorizontal,
-              ),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: kLightOrange,
@@ -155,7 +177,7 @@ class PetDetailPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          age,
+                          widget.age,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: kSourceSansProBold.copyWith(
@@ -174,9 +196,7 @@ class PetDetailPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: kLightOrange,
@@ -185,7 +205,7 @@ class PetDetailPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          color,
+                          widget.color,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: kSourceSansProBold.copyWith(
@@ -204,9 +224,7 @@ class PetDetailPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(
-                      vertical: 10,
-                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: kLightOrange,
@@ -215,7 +233,7 @@ class PetDetailPage extends StatelessWidget {
                     child: Column(
                       children: [
                         Text(
-                          weight,
+                          widget.weight,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: kSourceSansProBold.copyWith(
@@ -236,9 +254,7 @@ class PetDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: kPaddingHorizontal,
-            ),
+            const SizedBox(height: kPaddingHorizontal),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
@@ -250,23 +266,19 @@ class PetDetailPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 6,
-            ),
+            const SizedBox(height: 6),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
-                introduction,
+                widget.introduction,
                 style: kSourceSansProSemibold.copyWith(
                   color: kGrey,
                   fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
                 ),
               ),
             ),
-            const SizedBox(
-              height: kPaddingHorizontal,
-            ),
+            const SizedBox(height: kPaddingHorizontal),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
@@ -278,9 +290,7 @@ class PetDetailPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 12,
-            ),
+            const SizedBox(height: 12),
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
@@ -295,7 +305,7 @@ class PetDetailPage extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          imageDis1URL,
+                          widget.imageDis1URL,
                         ),
                       ),
                     ),
@@ -308,7 +318,7 @@ class PetDetailPage extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          imageDis2URL,
+                          widget.imageDis2URL,
                         ),
                       ),
                     ),
@@ -321,7 +331,7 @@ class PetDetailPage extends StatelessWidget {
                       image: DecorationImage(
                         fit: BoxFit.cover,
                         image: AssetImage(
-                          imageDis3URL,
+                          widget.imageDis3URL,
                         ),
                       ),
                     ),
@@ -329,9 +339,7 @@ class PetDetailPage extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(
-              height: 60,
-            ),
+            const SizedBox(height: 60),
           ],
         ),
       ),
