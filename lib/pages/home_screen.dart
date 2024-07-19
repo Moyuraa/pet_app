@@ -237,12 +237,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(width: 10),
               Text(
                 emoji,
-                style: Theme.of(context).textTheme.headlineMedium,
-                // style: TextStyle(
-                //   fontFamily: 'SourceSansPro',
-                //   fontWeight: FontWeight.w700,
-                //   fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                // ),
+                style: Theme.of(context).textTheme.displayLarge,
               )
             ],
           ),
