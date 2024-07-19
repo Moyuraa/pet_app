@@ -9,6 +9,7 @@ String petsModelToJson(List<PetsModel> data) =>
 class PetsModel {
   int id;
   String type;
+  String emoji;
   String name;
   String date;
   String description;
@@ -27,6 +28,7 @@ class PetsModel {
   PetsModel({
     required this.id,
     required this.type,
+    required this.emoji,
     required this.name,
     required this.date,
     required this.description,
@@ -46,6 +48,7 @@ class PetsModel {
   factory PetsModel.fromJson(Map<String, dynamic> json) => PetsModel(
         id: json["id"],
         type: json["type"],
+        emoji: json["emoji"],
         name: json["name"],
         date: json["date"],
         description: json["description"],
@@ -65,6 +68,7 @@ class PetsModel {
   Map<String, dynamic> toJson() => {
         "id": id,
         "type": type,
+        "emoji": emoji,
         "name": name,
         "date": date,
         "description": description,

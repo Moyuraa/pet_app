@@ -15,28 +15,3 @@ const double kBorderRadiusList = 11;
 
 // Define a common font family
 const String kFontFamily = 'SourceSansPro';
-
-const TextStyle kSourceSansProBold = TextStyle(
-  fontFamily: kFontFamily,
-  fontWeight: FontWeight.w700,
-);
-
-const TextStyle kSourceSansProSemibold = TextStyle(
-  fontFamily: kFontFamily,
-  fontWeight: FontWeight.w600,
-);
-
-const TextStyle kSourceSansProMedium = TextStyle(
-  fontFamily: kFontFamily,
-  fontWeight: FontWeight.w500,
-);
-
-const TextStyle kSourceSansProRegular = TextStyle(
-  fontFamily: kFontFamily,
-  fontWeight: FontWeight.w400,
-);
-
-const TextStyle kSourceSansProLight = TextStyle(
-  fontFamily: kFontFamily,
-  fontWeight: FontWeight.w300,
-);

@@ -1,127 +1,228 @@
+import 'package:final_project/themes/fontsize_logic.dart';
+import 'package:final_project/themes/language_constant.dart';
+import 'package:final_project/themes/language_logic.dart';
+import 'package:final_project/themes/mode_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/style/app_styles.dart';
 import 'package:final_project/style/size_config.dart';
 import 'package:final_project/widgets/pet_data.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'package:provider/provider.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _themeIndex = 0;
+  int _langIndex = 0;
+  Language _lang = Language();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return SafeArea(
+    _themeIndex = context.watch<ThemeLogic>().themeIndex;
+    _langIndex = context.watch<LanguageLogic>().langIndex;
+    _lang = context.watch<LanguageLogic>().lang;
+
+    return Scaffold(
+      appBar: _buildAppBar(),
+      body: _buildBody(),
+      drawer: _buildDrawer(),
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.notifications),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildBody() {
+    return ListView(
+      children: [
+        const SizedBox(height: 10),
+        SizedBox(
+          height: 200,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                top: 0,
+                right: 0,
+                bottom: 0,
+                child: Image.asset(
+                  'assets/images/welcome_message.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+              Positioned(
+                left: SizeConfig.blockSizeHorizontal! * 38,
+                top: 0,
+                bottom: 0,
+                right: 0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Welcome to ',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                        const SizedBox(width: 6),
+                        Text(
+                          'NaRaPet',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          '👋',
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 5),
+                    Text(
+                      'Ready for an amazing and lucky',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      'experience 🐈 🐕 🐇 🐦',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+        const SizedBox(height: 10),
+        _buildPetSection('Dogs', '🐕', dogs, dogsName, dogsDate),
+        const SizedBox(height: 30),
+        _buildPetSection('Cats', '🐈', cats, catsName, catsDate),
+        const SizedBox(height: 30),
+        _buildPetSection('Bunnies', '🐇', bunnies, bunniesName, bunniesDate),
+        const SizedBox(height: 30),
+        _buildPetSection('Birds', '🐦', birds, birdsName, birdsDate),
+      ],
+    );
+  }
+
+  Widget _buildDrawer() {
+    return Drawer(
       child: ListView(
         children: [
-          const SizedBox(height: 10),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.person,
-                  size: 30,
-                  color: Colors.black,
-                ),
-                Icon(
-                  Icons.notifications,
-                  size: 30,
-                  color: Colors.black,
-                ),
-              ],
-            ),
+          const DrawerHeader(
+            child: Icon(Icons.pets),
           ),
-          const SizedBox(height: 19),
-          SizedBox(
-            height: 200,
-            child: Stack(
-              children: [
-                Positioned(
-                  left: 0,
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  child: Image.asset(
-                    'assets/images/welcome_message.png',
-                    fit: BoxFit.cover,
+          ExpansionTile(
+            title: Text(
+              _lang.theme,
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            initiallyExpanded: false,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.light_mode),
+                title: Text(_lang.toLightMode),
+                onTap: () {
+                  context.read<ThemeLogic>().changeToLightMode();
+                },
+                trailing: _themeIndex == 0 ? const Icon(Icons.check) : null,
+              ),
+              ListTile(
+                leading: const Icon(Icons.dark_mode),
+                title: Text(_lang.toDarkMode),
+                onTap: () {
+                  context.read<ThemeLogic>().changeToDarkMode();
+                },
+                trailing: _themeIndex == 1 ? const Icon(Icons.check) : null,
+              ),
+            ],
+          ),
+          ExpansionTile(
+            title: Text(
+              _lang.language,
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            initiallyExpanded: false,
+            children: [
+              ListTile(
+                leading: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      _lang.kh,
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
                 ),
-                Positioned(
-                  left: SizeConfig.blockSizeHorizontal! * 38,
-                  top: 0,
-                  bottom: 0,
-                  right: 0,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Hello',
-                            style: TextStyle(
-                              fontFamily: 'SourceSansPro',
-                              fontWeight: FontWeight.w300,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 5.5,
-                              color: kBlack,
-                            ),
-                          ),
-                          const SizedBox(width: 6),
-                          Text(
-                            'NaRaPet',
-                            style: TextStyle(
-                              fontFamily: 'SourceSansPro',
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 5.5,
-                              color: kBlack,
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Text(
-                            '👋',
-                            style: TextStyle(
-                              fontFamily: 'SourceSansPro',
-                              fontWeight: FontWeight.w500,
-                              fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                              color: kBlack,
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 5),
-                      Text(
-                        'Ready for an amazing and lucky experience 🐈 🐕 🐇 🐦',
-                        style: TextStyle(
-                          fontFamily: 'SourceSansPro',
-                          fontWeight: FontWeight.w400,
-                          fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                          color: kBlack,
-                        ),
-                      )
-                    ],
+                trailing: _langIndex == 0 ? const Icon(Icons.check) : null,
+                title: Text(_lang.khmer),
+                onTap: () {
+                  context.read<LanguageLogic>().changeToKhmer();
+                },
+              ),
+              ListTile(
+                leading: Card(
+                  child: Padding(
+                    padding: EdgeInsets.all(5.0),
+                    child: Text(
+                      _lang.en,
+                      style: TextStyle(fontSize: 16),
+                    ),
                   ),
-                )
-              ],
-            ),
+                ),
+                trailing: _langIndex == 1 ? const Icon(Icons.check) : null,
+                title: Text(_lang.english),
+                onTap: () {
+                  context.read<LanguageLogic>().changeToEnglish();
+                },
+              ),
+            ],
           ),
-          const SizedBox(height: 10),
-          _buildPetSection('Dogs', '🐕', dogs, dogsName),
-          const SizedBox(height: 30),
-          _buildPetSection('Cats', '🐈', cats, catsName),
-          const SizedBox(height: 30),
-          _buildPetSection('Bunnies', '🐇', bunnies, bunniesName),
-          const SizedBox(height: 30),
-          _buildPetSection('Birds', '🐦', birds, birdsName),
+          ExpansionTile(
+            title: Text(
+              _lang.fontSize,
+              style: Theme.of(context).textTheme.displayLarge,
+            ),
+            initiallyExpanded: false,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.remove),
+                title: Text(_lang.smallerSize),
+                onTap: () {
+                  context.read<FontSizeLogic>().decrease();
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.add),
+                title: Text(_lang.biggerSize),
+                onTap: () {
+                  context.read<FontSizeLogic>().increase();
+                },
+              ),
+            ],
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildPetSection(
-      String title, String emoji, List<String> images, List<String> names) {
+  Widget _buildPetSection(String title, String emoji, List<String> images,
+      List<String> names, List<String> dates) {
     return Column(
       children: [
         Container(
@@ -131,20 +232,17 @@ class HomeScreen extends StatelessWidget {
             children: [
               Text(
                 title,
-                style: TextStyle(
-                  fontFamily: 'SourceSansPro',
-                  fontWeight: FontWeight.w700,
-                  fontSize: SizeConfig.blockSizeHorizontal! * 6,
-                ),
+                style: Theme.of(context).textTheme.headlineLarge,
               ),
               const SizedBox(width: 10),
               Text(
                 emoji,
-                style: TextStyle(
-                  fontFamily: 'SourceSansPro',
-                  fontWeight: FontWeight.w700,
-                  fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                ),
+                style: Theme.of(context).textTheme.headlineMedium,
+                // style: TextStyle(
+                //   fontFamily: 'SourceSansPro',
+                //   fontWeight: FontWeight.w700,
+                //   fontSize: SizeConfig.blockSizeHorizontal! * 3,
+                // ),
               )
             ],
           ),
@@ -202,12 +300,7 @@ class HomeScreen extends StatelessWidget {
                           child: Center(
                             child: Text(
                               'Adoption',
-                              style: TextStyle(
-                                fontFamily: 'SourceSansPro',
-                                fontWeight: FontWeight.w700,
-                                fontSize: SizeConfig.blockSizeHorizontal! * 2.5,
-                                color: kOrange,
-                              ),
+                              style: Theme.of(context).textTheme.labelSmall,
                             ),
                           ),
                         ),
@@ -225,12 +318,7 @@ class HomeScreen extends StatelessWidget {
                           names[index],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontFamily: 'SourceSansPro',
-                            fontWeight: FontWeight.w700,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                            color: kGrey,
-                          ),
+                          style: Theme.of(context).textTheme.labelLarge,
                         ),
                       ],
                     ),
@@ -238,15 +326,10 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '17 jun 2024',
+                          dates[index],
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontFamily: 'SourceSansPro',
-                            fontWeight: FontWeight.w400,
-                            fontSize: SizeConfig.blockSizeHorizontal! * 2,
-                            color: kLightGrey,
-                          ),
+                          style: Theme.of(context).textTheme.labelMedium,
                         ),
                       ],
                     )

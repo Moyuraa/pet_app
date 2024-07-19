@@ -61,12 +61,7 @@ class PetCard extends StatelessWidget {
                 child: Center(
                   child: Text(
                     'Adoption',
-                    style: TextStyle(
-                      fontFamily: 'SourceSansPro',
-                      fontWeight: FontWeight.w700,
-                      fontSize: SizeConfig.blockSizeHorizontal! * 2.5,
-                      color: kOrange,
-                    ),
+                    style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ),
               ),
@@ -85,12 +80,7 @@ class PetCard extends StatelessWidget {
                   petName,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
-                  style: TextStyle(
-                    fontFamily: 'SourceSansPro',
-                    fontWeight: FontWeight.w700,
-                    fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                    color: kGrey,
-                  ),
+                  style: Theme.of(context).textTheme.headlineSmall,
                 ),
               ),
             ],
@@ -102,12 +92,7 @@ class PetCard extends StatelessWidget {
                 date,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                  fontFamily: 'SourceSansPro',
-                  fontWeight: FontWeight.w400,
-                  fontSize: SizeConfig.blockSizeHorizontal! * 2,
-                  color: kLightGrey,
-                ),
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           )
