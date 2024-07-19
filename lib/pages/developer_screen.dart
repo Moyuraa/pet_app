@@ -99,18 +99,9 @@ class _DeveloperScreenState extends State<DeveloperScreen> {
                     height: 200,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
-                      child: CachedNetworkImage(
-                        width: double.infinity,
-                        height: double.infinity,
+                      child: Image.asset(
+                        user.profileUrl,
                         fit: BoxFit.cover,
-                        imageUrl: user.profileUrl,
-                        placeholder: (context, url) => Container(
-                          color: Colors.white,
-                        ),
-                        errorWidget: (context, url, error) => Container(
-                          alignment: Alignment.center,
-                          child: const Icon(Icons.error),
-                        ),
                       ),
                     ),
                   ),
