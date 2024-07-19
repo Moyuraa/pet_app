@@ -232,7 +232,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 title,
-                style: Theme.of(context).textTheme.headlineLarge,
+                style: Theme.of(context).textTheme.displayLarge,
               ),
               const SizedBox(width: 10),
               Text(
