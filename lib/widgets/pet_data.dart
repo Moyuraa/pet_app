@@ -18,37 +18,31 @@ class PetData {
 
   get isAdopted => null;
 
-  String? get weight => null;
-
-  String? get age => null;
-
-  String? get color => null;
-
   get attribute3 => null;
 }
 
 final List<String> dogs = [
-  'dog_1.png',
-  'dog_2.png',
-  'dog_3.png',
+  'dogs/dog_1.png',
+  'dogs/dog_2.jpg',
+  'dogs/dog_3.jpg',
 ];
 
 final List<String> cats = [
-  'cat_1.png',
-  'cat_2.png',
-  'cat_3.png',
+  'cats/cat_1.jpg',
+  'cats/cat_2.jpg',
+  'cats/cat_3.jpg',
 ];
 
 final List<String> bunnies = [
-  'bunny_1.jpg',
-  'bunny_2.png',
-  'bunny_3.png',
+  'rabbits/bunny_1.jpg',
+  'rabbits/bunny_2.jpg',
+  'rabbits/bunny_3.jpg',
 ];
 
 final List<String> birds = [
-  'parrot_1.png',
-  'parrot_2.png',
-  'parrot_3.png',
+  'birds/parrot_1.jpg',
+  'birds/parrot_2.jpg',
+  'birds/parrot_3.jpg',
 ];
 
 final List<String> dogsName = [
@@ -73,4 +67,28 @@ final List<String> birdsName = [
   'Alis',
   'Brik',
   'Mar',
+];
+
+final List<String> dogsDate = [
+  "17 June 2024",
+  "22 May 2024",
+  "3 August 2024",
+];
+
+final List<String> catsDate = [
+  "17 June 2024",
+  "17 June 2024",
+  "22 May 2024",
+];
+
+final List<String> bunniesDate = [
+  "17 June 2024",
+  "3 August 2024",
+  "17 June 2024",
+];
+
+final List<String> birdsDate = [
+  "17 June 2024",
+  "22 May 2024",
+  "3 August 2024",
 ];

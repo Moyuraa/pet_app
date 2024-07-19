@@ -13,7 +13,6 @@ class DevelopersModel {
   String phone;
   String email;
   String profileUrl;
-  String description;
 
   DevelopersModel({
     required this.id,
@@ -21,7 +20,6 @@ class DevelopersModel {
     required this.phone,
     required this.email,
     required this.profileUrl,
-    required this.description,
   });
 
   factory DevelopersModel.fromJson(Map<String, dynamic> json) =>
@@ -31,7 +29,6 @@ class DevelopersModel {
         phone: json["phone"],
         email: json["email"],
         profileUrl: json["profileURL"],
-        description: json["description"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -40,6 +37,5 @@ class DevelopersModel {
         "phone": phone,
         "email": email,
         "profileURL": profileUrl,
-        "description": description,
       };
 }

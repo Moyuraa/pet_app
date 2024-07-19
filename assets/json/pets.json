@@ -1,7 +1,8 @@
 [
     {
         "id": 1,
-        "type": "dog",
+        "type": "Dogs",
+        "emoji": "🐕",
         "name": "Marly",
         "date": "17 June 2024",
         "description": "Friendly and playful dog.",
@@ -14,12 +15,13 @@
         "weight": "6KG",
         "introduction": "Remember this sweet face? Several years ago Charlie came into our care when their person died. These two easy-going Lhasa Apso mixes quickly to settle into foster care. Living with kids, cats, and other dogs, they were the perfect guests, and once their vetting and evaluation was done this bonded pair found their home with a kind couple.",
         "imageDis1URL": "assets/images/dogs/dog_1.png",
-        "imageDis2URL": "assets/images/dogs/dog_2.png",
-        "imageDis3URL": "assets/images/dogs/dog_3.png"
+        "imageDis2URL": "assets/images/dogs/dog_2.jpg",
+        "imageDis3URL": "assets/images/dogs/dog_3.jpg"
     },
     {
         "id": 2,
-        "type": "dog",
+        "type": "Dogs",
+        "emoji": "🐕",
         "name": "Cocoa",
         "date": "22 May 2024",
         "description": "Affectionate and independent dog.",
@@ -33,11 +35,12 @@
         "introduction": "Remember this sweet face? Several years ago Charlie came into our care when their person died. These two easy-going Lhasa Apso mixes quickly to settle into foster care. Living with kids, cats, and other dogs, they were the perfect guests, and once their vetting and evaluation was done this bonded pair found their home with a kind couple.",
         "imageDis1URL": "assets/images/dogs/dog_2.jpg",
         "imageDis2URL": "assets/images/dogs/dog_3.jpg",
-        "imageDis3URL": "assets/images/dogs/dog_1.jpg"
+        "imageDis3URL": "assets/images/dogs/dog_1.png"
     },
     {
         "id": 3,
-        "type": "dog",
+        "type": "Dogs",
+        "emoji": "🐕",
         "name": "Walt",
         "date": "3 August 2024",
         "description": "Energetic and curious dog.",
@@ -51,11 +54,12 @@
         "introduction": "Remember this sweet face? Several years ago Charlie came into our care when their person died. These two easy-going Lhasa Apso mixes quickly to settle into foster care. Living with kids, cats, and other dogs, they were the perfect guests, and once their vetting and evaluation was done this bonded pair found their home with a kind couple.",
         "imageDis1URL": "assets/images/dogs/dog_3.jpg",
         "imageDis2URL": "assets/images/dogs/dog_2.jpg",
-        "imageDis3URL": "assets/images/dogs/dog_1.jpg"
+        "imageDis3URL": "assets/images/dogs/dog_1.png"
     },
     {
         "id": 4,
-        "type": "cat",
+        "type": "Cats",
+        "emoji": "🐈",
         "name": "Alyx",
         "date": "17 June 2024",
         "description": "Cute and cuddly cat.",
@@ -73,7 +77,8 @@
     },
     {
         "id": 5,
-        "type": "cat",
+        "type": "Cats",
+        "emoji": "🐈",
         "name": "Mittens",
         "date": "17 June 2024",
         "description": "Gentle and affectionate cat.",
@@ -91,7 +96,8 @@
     },
     {
         "id": 6,
-        "type": "cat",
+        "type": "Cats",
+        "emoji": "🐈",
         "name": "Bella",
         "date": "22 May 2024",
         "description": "Curious and independent cat.",
@@ -109,7 +115,8 @@
     },    
     {
         "id": 7,
-        "type": "rabbit",
+        "type": "Bunnies",
+        "emoji": "🐇",
         "name": "Ali",
         "date": "17 June 2024",
         "description": "Lovable bunny looking for a home.",
@@ -127,7 +134,8 @@
     },
     {
         "id": 8,
-        "type": "rabbit",
+        "type": "Bunnies",
+        "emoji": "🐇",
         "name": "Bunny",
         "date": "3 August 2024",
         "description": "Energetic and playful rabbit.",
@@ -145,7 +153,8 @@
     },
     {
         "id": 9,
-        "type": "rabbit",
+        "type": "Bunnies",
+        "emoji": "🐇",
         "name": "Fluffy",
         "date": "17 June 2024",
         "description": "Soft and cuddly rabbit.",
@@ -163,7 +172,8 @@
     },
     {
         "id": 10,
-        "type": "bird",
+        "type": "Birds",
+        "emoji": "🐦",
         "name": "Alis",
         "date": "17 June 2024",
         "description": "Colorful bird seeking a caring owner.",
@@ -181,7 +191,8 @@
     },
     {
         "id": 11,
-        "type": "bird",
+        "type": "Birds",
+        "emoji": "🐦",
         "name": "Tweety",
         "date": "22 May 2024",
         "description": "Friendly and talkative bird.",
@@ -199,7 +210,8 @@
     },
     {
         "id": 12,
-        "type": "bird",
+        "type": "Birds",
+        "emoji": "🐦",
         "name": "Feathers",
         "date": "3 August 2024",
         "description": "Colorful and playful bird.",

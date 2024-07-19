@@ -1,7 +1,10 @@
+import 'package:final_project/themes/language_constant.dart';
+import 'package:final_project/themes/language_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:final_project/style/size_config.dart';
 import 'package:final_project/style/app_styles.dart';
+import 'package:provider/provider.dart';
 
 class PetDetailPage extends StatefulWidget {
   final String imageCoverURL;
@@ -46,10 +49,13 @@ class _PetDetailPageState extends State<PetDetailPage> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
+    Language _lang = Language();
+    _lang = context.watch<LanguageLogic>().lang;
+
     return Scaffold(
       backgroundColor: kWhite,
       appBar: AppBar(
-        shadowColor: Colors.purple,
+        backgroundColor: Colors.transparent,
         automaticallyImplyLeading: true,
       ),
       body: SingleChildScrollView(
@@ -80,24 +86,6 @@ class _PetDetailPageState extends State<PetDetailPage> {
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        top: SizeConfig.blockSizeVertical! * 8,
-                        left: SizeConfig.blockSizeHorizontal! * 8,
-                      ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: SvgPicture.asset(
-                          'assets/arrow_left_icon.svg',
-                          width: 40,
-                        ),
-                      ),
-                    ),
-                  )
                 ],
               ),
             ),
@@ -110,52 +98,31 @@ class _PetDetailPageState extends State<PetDetailPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              child: Text(
-                                widget.petName,
-                                style: kSourceSansProBold.copyWith(
-                                  fontSize: SizeConfig.blockSizeHorizontal! * 6,
-                                  color: kGrey,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                            IconButton(
-                              icon: Icon(
-                                isFavorite
-                                    ? Icons.favorite
-                                    : Icons.favorite_border,
-                                color: isFavorite ? Colors.red : Colors.grey,
-                              ),
-                              onPressed: toggleFavorite,
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 2),
-                        Row(
-                          children: [
-                            SvgPicture.asset(
-                              'assets/pin_point_icon.svg',
-                            ),
-                            const SizedBox(width: 8),
-                            Text(
-                              widget.location,
-                              style: kSourceSansProLight.copyWith(
-                                fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                                color: kLightGrey,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                  Column(
+                    children: [
+                      Text(
+                        petName,
+                        style: Theme.of(context).textTheme.headlineLarge,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(
+                        height: 2,
+                      ),
+                      Row(
+                        children: [
+                          SvgPicture.asset(
+                            'assets/images/icons/pin_point_icon.svg',
+                          ),
+                          const SizedBox(
+                            width: 8,
+                          ),
+                          Text(
+                            location,
+                            style: Theme.of(context).textTheme.bodySmall,
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -180,17 +147,11 @@ class _PetDetailPageState extends State<PetDetailPage> {
                           widget.age,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: kSourceSansProBold.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                            color: kOrange,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'Age',
-                          style: kSourceSansProLight.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                            color: kLightGrey,
-                          ),
+                          _lang.age,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
                     ),
@@ -208,17 +169,12 @@ class _PetDetailPageState extends State<PetDetailPage> {
                           widget.color,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: kSourceSansProBold.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                            color: kOrange,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
+                          // ),
                         ),
                         Text(
-                          'Color',
-                          style: kSourceSansProLight.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                            color: kLightGrey,
-                          ),
+                          _lang.color,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
                     ),
@@ -236,17 +192,11 @@ class _PetDetailPageState extends State<PetDetailPage> {
                           widget.weight,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
-                          style: kSourceSansProBold.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 4,
-                            color: kOrange,
-                          ),
+                          style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Text(
-                          'Weight',
-                          style: kSourceSansProLight.copyWith(
-                            fontSize: SizeConfig.blockSizeHorizontal! * 3,
-                            color: kLightGrey,
-                          ),
+                          _lang.weight,
+                          style: Theme.of(context).textTheme.bodyLarge,
                         )
                       ],
                     ),
@@ -259,11 +209,8 @@ class _PetDetailPageState extends State<PetDetailPage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
-                'About me',
-                style: kSourceSansProLight.copyWith(
-                  color: kLightGrey,
-                  fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                ),
+                _lang.aboutMe,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             const SizedBox(height: 6),
@@ -271,11 +218,8 @@ class _PetDetailPageState extends State<PetDetailPage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
-                widget.introduction,
-                style: kSourceSansProSemibold.copyWith(
-                  color: kGrey,
-                  fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                ),
+                introduction,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ),
             const SizedBox(height: kPaddingHorizontal),
@@ -283,11 +227,8 @@ class _PetDetailPageState extends State<PetDetailPage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: kPaddingHorizontal),
               child: Text(
-                'Photo Album',
-                style: kSourceSansProLight.copyWith(
-                  color: kLightGrey,
-                  fontSize: SizeConfig.blockSizeHorizontal! * 3.5,
-                ),
+                _lang.album,
+                style: Theme.of(context).textTheme.headlineSmall,
               ),
             ),
             const SizedBox(height: 12),

@@ -1,8 +1,11 @@
 import 'package:final_project/models/pet_model.dart';
 import 'package:final_project/services/pet_service.dart';
+import 'package:final_project/themes/language_constant.dart';
+import 'package:final_project/themes/language_logic.dart';
 import 'package:flutter/material.dart';
 import 'package:final_project/widgets/pet_card.dart';
 import 'package:final_project/pages/pet_detail_screen.dart';
+import 'package:provider/provider.dart';
 
 class ListScreen extends StatefulWidget {
   ListScreen({Key? key}) : super(key: key);
@@ -12,12 +15,16 @@ class ListScreen extends StatefulWidget {
 }
 
 class _ListScreenState extends State<ListScreen> {
+  Language _lang = Language();
+
   var _petData = PetService.getPets();
 
   String searchQuery = '';
 
   @override
   Widget build(BuildContext context) {
+    _lang = context.watch<LanguageLogic>().lang;
+
     return Scaffold(
         body: Center(
       child: FutureBuilder<List<PetsModel>>(
@@ -36,11 +43,12 @@ class _ListScreenState extends State<ListScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    'Pet List',
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
                   const SizedBox(height: 8.0),
+                  Text(
+                    _lang.titleList,
+                    style: Theme.of(context).textTheme.displayLarge,
+                  ),
+                  const SizedBox(height: 16.0),
                   TextField(
                     onChanged: (value) {
                       setState(() {
@@ -48,10 +56,10 @@ class _ListScreenState extends State<ListScreen> {
                       });
                     },
                     decoration: InputDecoration(
-                      hintText: 'Search pets',
+                      hintText: _lang.search,
                       prefixIcon: const Icon(Icons.search),
                       border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8.0),
+                        borderRadius: BorderRadius.circular(16.0),
                       ),
                     ),
                   ),
@@ -77,6 +85,14 @@ class _ListScreenState extends State<ListScreen> {
       );
     }
 
+    List<PetsModel> filteredPets = pets.where((pet) {
+      if (searchQuery.isEmpty) {
+        return true;
+      }
+      return pet.name.toLowerCase().contains(searchQuery.toLowerCase()) ||
+          pet.introduction.toLowerCase().contains(searchQuery.toLowerCase());
+    }).toList();
+
     return GridView.builder(
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -84,7 +100,7 @@ class _ListScreenState extends State<ListScreen> {
         mainAxisSpacing: 10.0,
       ),
       physics: const BouncingScrollPhysics(),
-      itemCount: pets.length,
+      itemCount: filteredPets.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
@@ -92,21 +108,21 @@ class _ListScreenState extends State<ListScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => PetDetailPage(
-                  imageCoverURL: pets[index].imageCoverUrl,
-                  petName: pets[index].name,
-                  location: pets[index].location,
-                  age: pets[index].age,
-                  color: pets[index].color,
-                  weight: pets[index].weight,
-                  introduction: pets[index].introduction,
-                  imageDis1URL: pets[index].imageDis1Url,
-                  imageDis2URL: pets[index].imageDis2Url,
-                  imageDis3URL: pets[index].imageDis3Url,
+                  imageCoverURL: filteredPets[index].imageCoverUrl,
+                  petName: filteredPets[index].name,
+                  location: filteredPets[index].location,
+                  age: filteredPets[index].age,
+                  color: filteredPets[index].color,
+                  weight: filteredPets[index].weight,
+                  introduction: filteredPets[index].introduction,
+                  imageDis1URL: filteredPets[index].imageDis1Url,
+                  imageDis2URL: filteredPets[index].imageDis2Url,
+                  imageDis3URL: filteredPets[index].imageDis3Url,
                 ),
               ),
             );
           },
-          child: _buildPet(pets[index]),
+          child: _buildPet(filteredPets[index]),
         );
       },
     );
